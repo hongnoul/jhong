@@ -6,7 +6,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 	<main class="relative h-screen overflow-hidden">
 		<div
 			id="pdf-bounce"
-			class="fixed left-0 top-0 z-10 overflow-hidden bg-white"
+			class="fixed left-0 top-0 z-10 overflow-hidden bg-white transition-[border-color] duration-200"
 		>
 			<iframe
 				class="h-full w-full"
@@ -21,6 +21,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 	:global(body) {
 		overflow: hidden;
 	}
+	#pdf-bounce.is-hover {
+		outline: 6px solid #4f46e5;
+		outline-offset: 6px;
+		cursor: pointer;
+	}
 </style>
 
 <script>
@@ -31,6 +36,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 			frame.style.width = "100vw";
 			frame.style.height = "100vh";
 		} else {
+		let speedFactor = 1;
 		const setupFloat = ({
 			element,
 			aspect,
@@ -63,8 +69,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 			};
 
 			const step = () => {
-				x += vx;
-				y += vy;
+				x += vx * speedFactor;
+				y += vy * speedFactor;
 
 				if (x <= 0 || x + width >= window.innerWidth) {
 					vx *= -1;
@@ -93,6 +99,17 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 			margin: 80,
 			speedX: 1.4,
 			speedY: 1.1,
+		});
+		frame.addEventListener("mouseenter", () => {
+			speedFactor = 0.1;
+			frame.classList.add("is-hover");
+		});
+		frame.addEventListener("mouseleave", () => {
+			speedFactor = 1;
+			frame.classList.remove("is-hover");
+		});
+		frame.addEventListener("click", () => {
+			window.open("/JustinHong.pdf", "_blank", "noopener");
 		});
 		}
 	}
