@@ -1,0 +1,49 @@
+---
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/galmuri/dist/galmuri.css"
+		/>
+		<title>Astro</title>
+	</head>
+	<body>
+		<nav class="site-nav" aria-label="Primary">
+			<div class="logo-slot" aria-hidden="true"></div>
+		</nav>
+		<slot />
+	</body>
+</html>
+
+<style>
+	.site-nav {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 64px;
+		display: flex;
+		align-items: center;
+		background: #fff;
+		border-bottom: 1px solid #e1e1e1;
+		z-index: 10;
+	}
+
+	.logo-slot {
+		width: 140px;
+		height: 100%;
+		background: #e6e6e6;
+	}
+</style>
