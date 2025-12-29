@@ -1,5 +1,5 @@
 ---
-
+import "../styles/global.css";
 ---
 
 <html lang="en">
@@ -21,16 +21,47 @@
 		<title>Astro</title>
 	</head>
 	<body>
-		<nav class="folder-nav" aria-label="Primary">
-			<div class="folder-tabs">
-				<button class="folder-tab is-active" type="button">home</button>
-				<button class="folder-tab" type="button">projects</button>
-				<button class="folder-tab" type="button">writing</button>
-				<button class="folder-tab" type="button">contact</button>
+		<nav
+			class="fixed bottom-0 left-0 right-0 z-10 flex h-[var(--nav-height)] items-center bg-transparent"
+			aria-label="Primary"
+		>
+			<div
+				class="mx-auto flex w-full max-w-[960px] items-center justify-between gap-5 px-6"
+			>
+				<button
+					class="cursor-pointer bg-transparent p-0 font-[galmuri9] text-[0.95rem] lowercase tracking-[0.08em] text-black underline decoration-2"
+					type="button"
+				>
+					home
+				</button>
+				<button
+					class="cursor-pointer bg-transparent p-0 font-[galmuri9] text-[0.95rem] lowercase tracking-[0.08em] text-black hover:underline hover:decoration-2"
+					type="button"
+				>
+					projects
+				</button>
+				<button
+					class="cursor-pointer bg-transparent p-0 font-[galmuri9] text-[0.95rem] lowercase tracking-[0.08em] text-black hover:underline hover:decoration-2"
+					type="button"
+				>
+					writing
+				</button>
+				<button
+					class="cursor-pointer bg-transparent p-0 font-[galmuri9] text-[0.95rem] lowercase tracking-[0.08em] text-black hover:underline hover:decoration-2"
+					type="button"
+				>
+					contact
+				</button>
 			</div>
 		</nav>
-		<div class="marquee" role="presentation" aria-hidden="true">
-			<div class="marquee-track">
+		<div
+			class="fixed left-0 right-0 top-0 z-[11] flex h-[var(--marquee-height)] overflow-hidden bg-white text-black"
+			role="presentation"
+			aria-hidden="true"
+		>
+			<div
+				class="flex min-w-full flex-none items-center gap-10 whitespace-nowrap pl-10 font-[galmuri9] text-[1.1rem] lowercase tracking-[0.18em] animate-marquee"
+			>
 				<span>namyang@mit.edu</span>
 				<span>namyang@mit.edu</span>
 				<span>namyang@mit.edu</span>
@@ -39,7 +70,9 @@
 				<span>namyang@mit.edu</span>
 				<span>namyang@mit.edu</span>
 			</div>
-			<div class="marquee-track">
+			<div
+				class="flex min-w-full flex-none items-center gap-10 whitespace-nowrap pl-10 font-[galmuri9] text-[1.1rem] lowercase tracking-[0.18em] animate-marquee"
+			>
 				<span>namyang@mit.edu</span>
 				<span>namyang@mit.edu</span>
 				<span>namyang@mit.edu</span>
@@ -49,9 +82,20 @@
 				<span>namyang@mit.edu</span>
 			</div>
 		</div>
-		<main class="hero">
-			<h1 class="hero-title">
-				<span class="j">j</span><span class="period">.</span><span class="hong" data-alt="홍">洪</span>
+		<main
+			class="hero grid min-h-[calc(100vh-var(--marquee-height)-var(--nav-height))] place-items-center"
+		>
+			<h1
+				class="m-0 inline-flex items-center bg-white text-[clamp(12em,16vw,12rem)] leading-none tracking-[0] text-black font-[Galmuri14]"
+			>
+				<span class="font-[galmuri9] text-[#000]">j</span
+				><span class="-ml-[0.1em] -mr-[0.15em] font-[galmuri11] text-[#000]"
+					>.</span
+				><span
+					class="hong inline-block font-[Galmuri14] text-[#000] transition-[font-size] duration-[240ms] ease-in-out lg:hover:text-[1.75em]"
+					data-alt="홍"
+					>洪</span
+				>
 			</h1>
 		</main>
 		<!-- <script type="module" src="/src/hero-preview.js"></script> -->
@@ -67,153 +111,3 @@
 		</script>
 	</body>
 </html>
-<style>
-	:global(:root) {
-		--marquee-height: 3rem;
-		--nav-height: 3rem;
-	}
-
-	:global(body) {
-		margin: 0;
-		padding-top: var(--marquee-height);
-		padding-bottom: var(--nav-height);
-		background: #fff;
-		color: #111;
-		font-family: "Times New Roman", Times, serif;
-	}
-
-	.folder-nav {
-		position: fixed;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		height: var(--nav-height);
-		display: flex;
-		align-items: center;
-		z-index: 10;
-		background: transparent;
-	}
-
-	.folder-tabs {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		gap: 1.25rem;
-		max-width: 960px;
-		margin: 0 auto;
-		width: 100%;
-		padding: 0 1.5rem;
-	}
-
-	.folder-tab {
-		background: transparent;
-		border: 0;
-		color: #000;
-		font-family: "galmuri9", sans-serif;
-		font-size: 0.95rem;
-		letter-spacing: 0.08em;
-		padding: 0;
-		cursor: pointer;
-		text-transform: lowercase;
-	}
-
-	.folder-tab.is-active {
-		color: #000;
-		text-decoration: underline 2px;
-	}
-
-	.folder-tab:hover {
-		text-decoration: underline 2px;
-	}
-
-	.marquee {
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		height: var(--marquee-height);
-		overflow: hidden;
-		display: flex;
-		background: #fff;
-		color: #000;
-		z-index: 11;
-	}
-
-	.marquee-track {
-		display: flex;
-		align-items: center;
-		gap: 2.5rem;
-		padding-left: 2.5rem;
-		white-space: nowrap;
-		flex: 0 0 auto;
-		min-width: 100%;
-		animation: marquee-scroll 60s linear infinite;
-		font-family: "galmuri9", sans-serif;
-		font-size: 1.1rem;
-		letter-spacing: 0.18em;
-		text-transform: lowercase;
-	}
-
-	.marquee-track span {
-		display: inline-block;
-	}
-
-	@keyframes marquee-scroll {
-		from {
-			transform: translateX(0);
-		}
-		to {
-			transform: translateX(-100%);
-		}
-	}
-
-	.hero {
-		min-height: calc(100vh - var(--marquee-height) - var(--nav-height));
-		display: grid;
-		place-items: center;
-	}
-
-	.hero-title {
-		margin: 0;
-		display: inline-flex;
-		align-items: center;
-		font-size: clamp(12em, 16vw, 12rem);
-		letter-spacing: 0;
-		font-family: "Galmuri14", sans-serif;
-		color: #000;
-		background-color: #fff;
-		line-height: 1;
-	}
-
-	.hero-title .hong {
-		display: inline-block;
-		color: #CD2E3A;
-		font-family: "Galmuri14", sans-serif;
-		transition: font-size 240ms ease;
-	}
-
-	.hero-title .period {
-		margin-left: -0.1em;
-		margin-right: -0.15em;
-		font-family: "galmuri11", sans-serif;
-		color: #0F64CD;
-	}
-
-		.hero-title .j {
-		font-family: "galmuri7", sans-serif;
-		color: #0F64CD;
-	}
-
-	.hero-title .hong:hover {
-		font-size: 1.75em;
-	}
-
-	@media (max-width: 1024px) {
-		.hero-title .hong {
-			transition: none;
-		}
-		.hero-title .hong:hover {
-			font-size: 1em;
-		}
-	}
-</style>

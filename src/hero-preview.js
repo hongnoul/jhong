@@ -14,82 +14,42 @@ let lastMouseX = 0;
 let lastMouseY = 0;
 let isVisible = false;
 
-const style = document.createElement("style");
-style.textContent = `
-.wiki-preview-card {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: ${CARD_WIDTH}px;
-  background: #fff;
-  color: #111;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
-  overflow: hidden;
-  opacity: 0;
-  transform: translateY(6px);
-  transition: opacity ${ANIMATION_MS}ms ease, transform ${ANIMATION_MS}ms ease;
-  pointer-events: none;
-  z-index: 9999;
-}
-
-.wiki-preview-card.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-
-.wiki-preview-card img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-.wiki-preview-body {
-  padding: 14px 16px 16px;
-  font-family: "Times New Roman", Times, serif;
-}
-
-.wiki-preview-title {
-  font-weight: 700;
-  font-size: 1.1rem;
-  margin-bottom: 6px;
-}
-
-.wiki-preview-extract {
-  font-size: 0.95rem;
-  line-height: 1.35;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.wiki-preview-extract.is-loading {
-  color: #444;
-}
-`;
-
-document.head.appendChild(style);
+const hiddenClasses = ["opacity-0", "translate-y-1.5", "pointer-events-none"];
+const visibleClasses = ["opacity-100", "translate-y-0", "pointer-events-auto"];
 
 const card = document.createElement("div");
-card.className = "wiki-preview-card";
+card.className = [
+  "fixed",
+  "left-0",
+  "top-0",
+  "z-[9999]",
+  "w-[320px]",
+  "overflow-hidden",
+  "rounded-xl",
+  "bg-white",
+  "text-neutral-900",
+  "shadow-[0_10px_30px_rgba(0,0,0,0.12)]",
+  "transition",
+  "duration-[150ms]",
+  "ease-in-out",
+  ...hiddenClasses,
+].join(" ");
 card.setAttribute("role", "link");
 card.tabIndex = 0;
 
 const image = document.createElement("img");
-image.className = "wiki-preview-image";
+image.className = "block h-auto w-full";
 image.alt = "";
 image.hidden = true;
 
 const body = document.createElement("div");
-body.className = "wiki-preview-body";
+body.className = "p-[14px_16px_16px] font-[\"Times New Roman\"]";
 
 const titleEl = document.createElement("div");
-titleEl.className = "wiki-preview-title";
+titleEl.className = "mb-1.5 text-[1.1rem] font-bold";
 
 const extractEl = document.createElement("div");
-extractEl.className = "wiki-preview-extract";
+extractEl.className = "text-[0.95rem] leading-[1.35] line-clamp-3";
 
 body.appendChild(titleEl);
 body.appendChild(extractEl);
@@ -102,7 +62,7 @@ document.body.appendChild(card);
 function setLoadingState() {
   titleEl.textContent = ARTICLE_TITLE;
   extractEl.textContent = "Loading...";
-  extractEl.classList.add("is-loading");
+  extractEl.classList.add("text-neutral-600");
   image.hidden = true;
   image.src = "";
 }
@@ -110,7 +70,7 @@ function setLoadingState() {
 function setData(data) {
   titleEl.textContent = data.title || ARTICLE_TITLE;
   extractEl.textContent = data.extract || "";
-  extractEl.classList.remove("is-loading");
+  extractEl.classList.remove("text-neutral-600");
 
   if (data.thumbnail) {
     image.src = data.thumbnail;
@@ -196,13 +156,23 @@ function positionCard(x = lastMouseX, y = lastMouseY) {
   card.style.top = `${nextY}px`;
 }
 
+function setVisible(nextVisible) {
+  if (nextVisible) {
+    card.classList.remove(...hiddenClasses);
+    card.classList.add(...visibleClasses);
+  } else {
+    card.classList.remove(...visibleClasses);
+    card.classList.add(...hiddenClasses);
+  }
+}
+
 function showCard(event) {
   lastMouseX = event.clientX;
   lastMouseY = event.clientY;
 
   if (!isVisible) {
     isVisible = true;
-    card.classList.remove("is-visible");
+    setVisible(false);
   }
 
   positionCard();
@@ -211,7 +181,7 @@ function showCard(event) {
   if (isVisible) {
     requestAnimationFrame(() => {
       if (isVisible) {
-        card.classList.add("is-visible");
+        setVisible(true);
       }
     });
   }
@@ -239,13 +209,13 @@ function showCard(event) {
         return;
       }
       extractEl.textContent = "Preview unavailable.";
-      extractEl.classList.remove("is-loading");
+      extractEl.classList.remove("text-neutral-600");
     });
 }
 
 function hideCard() {
   isVisible = false;
-  card.classList.remove("is-visible");
+  setVisible(false);
 
   if (fetchController) {
     fetchController.abort();

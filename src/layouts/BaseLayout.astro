@@ -1,4 +1,5 @@
 ---
+import "../styles/global.css";
 ---
 
 <html lang="en">
@@ -20,30 +21,12 @@
 		<title>Astro</title>
 	</head>
 	<body>
-		<nav class="site-nav" aria-label="Primary">
-			<div class="logo-slot" aria-hidden="true"></div>
+		<nav
+			class="fixed left-0 right-0 top-0 z-10 flex h-16 items-center border-b border-neutral-200 bg-white"
+			aria-label="Primary"
+		>
+			<div class="h-full w-[140px] bg-neutral-200" aria-hidden="true"></div>
 		</nav>
 		<slot />
 	</body>
 </html>
-
-<style>
-	.site-nav {
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		height: 64px;
-		display: flex;
-		align-items: center;
-		background: #fff;
-		border-bottom: 1px solid #e1e1e1;
-		z-index: 10;
-	}
-
-	.logo-slot {
-		width: 140px;
-		height: 100%;
-		background: #e6e6e6;
-	}
-</style>
