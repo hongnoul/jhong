@@ -17,3 +17,10 @@
     font-family: "Times New Roman", Times, serif;
   }
 }
+
+@layer components {
+  .hero,
+  .hero * {
+    user-select: none;
+  }
+}
