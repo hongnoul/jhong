@@ -18,8 +18,11 @@
 	</head>
 	<body>
 		<main class="hero">
-			<h1>J洪</h1>
+			<h1 class="hero-title">
+				<span class="j">J</span><span class="hong">洪</span><span class="period"></span>
+			</h1>
 		</main>
+		<!-- <script type="module" src="/src/hero-preview.js"></script> -->
 	</body>
 </html>
 <style>
@@ -36,11 +39,24 @@
 		place-items: center;
 	}
 
-	.hero h1 {
+	.hero-title {
 		margin: 0;
-		font-size: clamp(4rem, 18vw, 200rem);
-		color: #E30B5D;
-		letter-spacing: 0em;
+		display: inline-flex;
+		align-items: center;
+		font-size: clamp(4rem, 12vw, 12rem);
+		letter-spacing: 0;
 		font-family: "DotGothic16", sans-serif;
+		color: #000;
+		background-color: #fff;
+		line-height: 1;
+	}
+
+	.hero-title .hong {
+		display: inline-block;
+		transition: font-size 240ms ease;
+	}
+
+	.hero-title .hong:hover {
+		font-size: 2em;
 	}
 </style>
