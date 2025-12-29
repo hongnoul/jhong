@@ -14,15 +14,29 @@
 			rel="stylesheet"
 			href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
 		/>
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/galmuri/dist/galmuri.css"
+		/>
 		<title>Astro</title>
 	</head>
 	<body>
 		<main class="hero">
 			<h1 class="hero-title">
-				<span class="j">J</span><span class="hong">洪</span><span class="period"></span>
+				<span class="j">j</span><span class="period">.</span><span class="hong" data-alt="홍">洪</span>
 			</h1>
 		</main>
 		<!-- <script type="module" src="/src/hero-preview.js"></script> -->
+		<script>
+			const hong = document.querySelector(".hong");
+			if (hong) {
+				hong.addEventListener("click", () => {
+					const alt = hong.dataset.alt || "";
+					hong.dataset.alt = hong.textContent || "";
+					hong.textContent = alt;
+				});
+			}
+		</script>
 	</body>
 </html>
 <style>
@@ -43,9 +57,9 @@
 		margin: 0;
 		display: inline-flex;
 		align-items: center;
-		font-size: clamp(4rem, 12vw, 12rem);
+		font-size: clamp(12em, 16vw, 12rem);
 		letter-spacing: 0;
-		font-family: "DotGothic16", sans-serif;
+		font-family: "Galmuri14", sans-serif;
 		color: #000;
 		background-color: #fff;
 		line-height: 1;
@@ -53,10 +67,21 @@
 
 	.hero-title .hong {
 		display: inline-block;
+		font-family: "Galmuri14", sans-serif;
 		transition: font-size 240ms ease;
 	}
 
+	.hero-title .period {
+		margin-left: -0.1em;
+		margin-right: -0.15em;
+		font-family: "galmuri11", sans-serif;
+	}
+
+		.hero-title .j {
+		font-family: "galmuri7", sans-serif;
+	}
+
 	.hero-title .hong:hover {
-		font-size: 2em;
+		font-size: 1.75em;
 	}
 </style>
