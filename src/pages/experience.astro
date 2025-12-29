@@ -1,0 +1,149 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout>
+	<main class="mx-auto flex max-w-4xl flex-col gap-8">
+
+		<section class="overflow-hidden">
+			<table class="w-full table-auto border-separate border-spacing-0">
+				<thead>
+					<tr class="text-[0.7rem] font-semibold uppercase tracking-[0.25em] text-neutral-500">
+						<th class="px-4 py-3 text-left font-[galmuri9]">Year</th>
+						<th class="px-4 py-3 text-left font-[galmuri9]">Client</th>
+						<th class="px-4 py-3 text-left font-[galmuri9]">Location</th>
+						<th class="px-4 py-3 text-left font-[galmuri9]">Scope</th>
+					</tr>
+				</thead>
+				<tbody class="text-xl font-[galmuri9] text-neutral-900">
+					<tr
+						class="group border-t border-neutral-200 transition-colors duration-200 hover:cursor-pointer hover:bg-indigo-600 hover:text-white"
+						data-preview="trustai"
+					>
+						<td class="px-4 pb-24 pt-6">2025</td>
+						<td class="px-4 pb-24 pt-6">TrustAI</td>
+						<td class="px-4 pb-24 pt-6">San Francisco, CA</td>
+						<td class="px-4 pb-24 pt-6">
+							Brand Strategy, Web Redesign
+						</td>
+					</tr>
+					<tr
+						class="group border-t border-neutral-200 transition-colors duration-200 hover:cursor-pointer hover:bg-indigo-600 hover:text-white"
+						data-preview="roka"
+					>
+						<td class="px-4 pb-24 pt-6">2024</td>
+						<td class="px-4 pb-24 pt-6">Republic of Korea Army</td>
+						<td class="px-4 pb-24 pt-6">Yeoncheon, <br>South Korea</td>
+						<td class="px-4 pb-24 pt-6">Call of Duty</td>
+					</tr>
+					<tr
+						class="group border-t border-neutral-200 transition-colors duration-200 hover:cursor-pointer hover:bg-indigo-600 hover:text-white"
+						data-preview="mit"
+					>
+						<td class="px-4 pb-24 pt-6">2024</td>
+						<td class="px-4 pb-24 pt-6">History at MIT</td>
+						<td class="px-4 pb-24 pt-6">Cambridge, MA</td>
+						<td class="px-4 pb-24 pt-6">Marketing site, content system</td>
+					</tr>
+					<tr
+						class="group border-t border-neutral-200 transition-colors duration-200 hover:cursor-pointer hover:bg-indigo-600 hover:text-white"
+						data-preview="doraji"
+					>
+						<td class="px-4 pb-24 pt-6">2024</td>
+						<td class="px-4 pb-24 pt-6">Doraji</td>
+						<td class="px-4 pb-24 pt-6">Seoul, <br>South Korea</td>
+						<td class="px-4 pb-24 pt-6">Music Production</td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+	</main>
+</BaseLayout>
+
+<img
+	id="trustai-preview"
+	src="/TrustAI.svg"
+	alt="TrustAI"
+	class="pointer-events-none fixed left-0 top-0 z-50 hidden w-[480px] -translate-x-1/2 -translate-y-1/2 opacity-0 transition-opacity duration-150"
+/>
+<img
+	id="roka-preview"
+	src="/roka.svg"
+	alt="Republic of Korea Army"
+	class="pointer-events-none fixed left-0 top-0 z-50 hidden w-[240px] -translate-x-1/2 -translate-y-1/2 opacity-0 transition-opacity duration-150"
+/>
+<img
+	id="mit-preview"
+	src="/mural.webp"
+	alt="History at MIT"
+	class="pointer-events-none fixed left-0 top-0 z-50 hidden w-[240px] -translate-x-1/2 -translate-y-1/2 opacity-0 transition-opacity duration-150"
+/>
+<img
+	id="doraji-preview"
+	src="/doraji.webp"
+	alt="Doraji"
+	class="pointer-events-none fixed left-0 top-0 z-50 hidden w-[240px] -translate-x-1/2 -translate-y-1/2 opacity-0 transition-opacity duration-150"
+/>
+
+<script>
+	const attachPreview = ({ previewId, rowSelector, onClick }) => {
+		const preview = document.querySelector(previewId);
+		const row = document.querySelector(rowSelector);
+		if (!preview || !row) {
+			return;
+		}
+
+		const show = () => {
+			preview.classList.remove("hidden");
+			requestAnimationFrame(() => {
+				preview.classList.remove("opacity-0");
+				preview.classList.add("opacity-100");
+			});
+		};
+		const hide = () => {
+			preview.classList.remove("opacity-100");
+			preview.classList.add("opacity-0");
+			setTimeout(() => {
+				preview.classList.add("hidden");
+			}, 150);
+		};
+		const move = (event) => {
+			const offset = 24;
+			preview.style.left = `${event.clientX + offset}px`;
+			preview.style.top = `${event.clientY + offset}px`;
+		};
+
+		row.addEventListener("mouseenter", show);
+		row.addEventListener("mouseleave", hide);
+		row.addEventListener("mousemove", move);
+		if (onClick) {
+			row.addEventListener("click", onClick);
+		}
+	};
+
+	attachPreview({
+		previewId: "#trustai-preview",
+		rowSelector: '[data-preview="trustai"]',
+		onClick: () => {
+			window.open("https://trustai-astro.vercel.app/", "_blank", "noopener");
+		},
+	});
+
+	attachPreview({
+		previewId: "#roka-preview",
+		rowSelector: '[data-preview="roka"]',
+	});
+
+	attachPreview({
+		previewId: "#mit-preview",
+		rowSelector: '[data-preview="mit"]',
+	});
+
+	attachPreview({
+		previewId: "#doraji-preview",
+		rowSelector: '[data-preview="doraji"]',
+		onClick: () => {
+			window.open("https://bandoraji.bandcamp.com/", "_blank", "noopener");
+		},
+	});
+</script>

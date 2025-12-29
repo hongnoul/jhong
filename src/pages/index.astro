@@ -1,87 +1,8 @@
 ---
-import "../styles/global.css";
+import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			rel="stylesheet"
-			href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
-		/>
-		<link
-			rel="stylesheet"
-			href="https://cdn.jsdelivr.net/npm/galmuri/dist/galmuri.css"
-		/>
-		<title>Astro</title>
-	</head>
-	<body>
-		<nav
-			class="fixed bottom-0 left-0 right-0 z-10 flex h-[var(--nav-height)] items-center bg-transparent"
-			aria-label="Primary"
-		>
-			<div
-				class="mx-auto flex w-full max-w-[960px] items-center justify-between gap-5 px-6"
-			>
-				<button
-					class="cursor-pointer bg-transparent p-0 font-[galmuri9] text-[0.95rem] lowercase tracking-[0.08em] text-black underline decoration-2"
-					type="button"
-				>
-					home
-				</button>
-				<button
-					class="cursor-pointer bg-transparent p-0 font-[galmuri9] text-[0.95rem] lowercase tracking-[0.08em] text-black hover:underline hover:decoration-2"
-					type="button"
-				>
-					projects
-				</button>
-				<button
-					class="cursor-pointer bg-transparent p-0 font-[galmuri9] text-[0.95rem] lowercase tracking-[0.08em] text-black hover:underline hover:decoration-2"
-					type="button"
-				>
-					writing
-				</button>
-				<button
-					class="cursor-pointer bg-transparent p-0 font-[galmuri9] text-[0.95rem] lowercase tracking-[0.08em] text-black hover:underline hover:decoration-2"
-					type="button"
-				>
-					contact
-				</button>
-			</div>
-		</nav>
-		<div
-			class="fixed left-0 right-0 top-0 z-[11] flex h-[var(--marquee-height)] overflow-hidden bg-white text-black"
-			role="presentation"
-			aria-hidden="true"
-		>
-			<div
-				class="flex min-w-full flex-none items-center gap-10 whitespace-nowrap pl-10 font-[galmuri9] text-[1.1rem] lowercase tracking-[0.18em] animate-marquee"
-			>
-				<span>namyang@mit.edu</span>
-				<span>namyang@mit.edu</span>
-				<span>namyang@mit.edu</span>
-				<span>namyang@mit.edu</span>
-				<span>namyang@mit.edu</span>
-				<span>namyang@mit.edu</span>
-				<span>namyang@mit.edu</span>
-			</div>
-			<div
-				class="flex min-w-full flex-none items-center gap-10 whitespace-nowrap pl-10 font-[galmuri9] text-[1.1rem] lowercase tracking-[0.18em] animate-marquee"
-			>
-				<span>namyang@mit.edu</span>
-				<span>namyang@mit.edu</span>
-				<span>namyang@mit.edu</span>
-				<span>namyang@mit.edu</span>
-				<span>namyang@mit.edu</span>
-				<span>namyang@mit.edu</span>
-				<span>namyang@mit.edu</span>
-			</div>
-		</div>
+<BaseLayout>
 		<main
 			class="hero grid min-h-[calc(100vh-var(--marquee-height)-var(--nav-height))] place-items-center"
 		>
@@ -109,5 +30,5 @@ import "../styles/global.css";
 				});
 			}
 		</script>
-	</body>
-</html>
+	
+</BaseLayout>

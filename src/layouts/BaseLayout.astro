@@ -1,5 +1,15 @@
 ---
 import "../styles/global.css";
+import { ViewTransitions } from "astro:transitions";
+
+const navItems = [
+	{ label: "home", href: "/" },
+	{ label: "experience", href: "/experience" },
+	{ label: "writing", href: "/writing" },
+	{ label: "résumé", href: "/resume" },
+];
+
+const currentPath = Astro.url.pathname;
 ---
 
 <html lang="en">
@@ -19,13 +29,63 @@ import "../styles/global.css";
 			href="https://cdn.jsdelivr.net/npm/galmuri/dist/galmuri.css"
 		/>
 		<title>Astro</title>
+		<ViewTransitions />
 	</head>
 	<body>
+		<div
+			class="fixed left-0 right-0 top-0 z-[11] flex h-[var(--marquee-height)] overflow-hidden bg-transparent text-black"
+			role="presentation"
+			aria-hidden="true"
+			transition:persist
+		>
+			<div
+				class="flex min-w-full flex-none items-center gap-10 whitespace-nowrap pl-10 font-[galmuri9] text-[1.1rem] lowercase tracking-[0.18em] animate-marquee"
+			>
+				<span>namyang@mit.edu</span>
+				<span>namyang@mit.edu</span>
+				<span>namyang@mit.edu</span>
+				<span>namyang@mit.edu</span>
+				<span>namyang@mit.edu</span>
+				<span>namyang@mit.edu</span>
+				<span>namyang@mit.edu</span>
+			</div>
+			<div
+				class="flex min-w-full flex-none items-center gap-10 whitespace-nowrap pl-10 font-[galmuri9] text-[1.1rem] lowercase tracking-[0.18em] animate-marquee"
+			>
+				<span>namyang@mit.edu</span>
+				<span>namyang@mit.edu</span>
+				<span>namyang@mit.edu</span>
+				<span>namyang@mit.edu</span>
+				<span>namyang@mit.edu</span>
+				<span>namyang@mit.edu</span>
+				<span>namyang@mit.edu</span>
+			</div>
+		</div>
 		<nav
-			class="fixed left-0 right-0 top-0 z-10 flex h-16 items-center border-b border-neutral-200 bg-white"
+			class="fixed bottom-0 left-0 right-0 z-10 flex h-[var(--nav-height)] items-center bg-transparent"
 			aria-label="Primary"
 		>
-			<div class="h-full w-[140px] bg-neutral-200" aria-hidden="true"></div>
+			<div
+				class="mx-auto flex w-full max-w-[960px] items-center justify-between gap-5 px-6"
+			>
+				{navItems.map((item) => {
+					const isActive =
+						item.href === "/"
+							? currentPath === "/"
+							: currentPath.startsWith(item.href);
+					return (
+						<a
+							class={`cursor-pointer bg-transparent p-0 font-[galmuri9] text-[0.95rem] lowercase tracking-[0.08em] text-black hover:underline hover:decoration-2 ${
+								isActive ? "underline decoration-2" : ""
+							}`}
+							href={item.href}
+							aria-current={isActive ? "page" : undefined}
+						>
+							{item.label}
+						</a>
+					);
+				})}
+			</div>
 		</nav>
 		<slot />
 	</body>
