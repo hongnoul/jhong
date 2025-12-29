@@ -85,65 +85,73 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 	class="pointer-events-none fixed left-0 top-0 z-50 hidden w-[240px] -translate-x-1/2 -translate-y-1/2 opacity-0 transition-opacity duration-150"
 />
 
-<script>
-	const attachPreview = ({ previewId, rowSelector, onClick }) => {
-		const preview = document.querySelector(previewId);
-		const row = document.querySelector(rowSelector);
-		if (!preview || !row) {
-			return;
-		}
+<script is:inline>
+	const initPreviews = () => {
+		const attachPreview = ({ previewId, rowSelector, onClick }) => {
+			const preview = document.querySelector(previewId);
+			const row = document.querySelector(rowSelector);
+			if (!preview || !row || row.dataset.previewBound === "true") {
+				return;
+			}
+			row.dataset.previewBound = "true";
 
-		const show = () => {
-			preview.classList.remove("hidden");
-			requestAnimationFrame(() => {
-				preview.classList.remove("opacity-0");
-				preview.classList.add("opacity-100");
-			});
-		};
-		const hide = () => {
-			preview.classList.remove("opacity-100");
-			preview.classList.add("opacity-0");
-			setTimeout(() => {
-				preview.classList.add("hidden");
-			}, 150);
-		};
-		const move = (event) => {
-			const offset = 24;
-			preview.style.left = `${event.clientX + offset}px`;
-			preview.style.top = `${event.clientY + offset}px`;
+			const show = () => {
+				preview.classList.remove("hidden");
+				requestAnimationFrame(() => {
+					preview.classList.remove("opacity-0");
+					preview.classList.add("opacity-100");
+				});
+			};
+			const hide = () => {
+				preview.classList.remove("opacity-100");
+				preview.classList.add("opacity-0");
+				setTimeout(() => {
+					preview.classList.add("hidden");
+				}, 150);
+			};
+			const move = (event) => {
+				const offset = 24;
+				preview.style.left = `${event.clientX + offset}px`;
+				preview.style.top = `${event.clientY + offset}px`;
+			};
+
+			row.addEventListener("mouseenter", show);
+			row.addEventListener("mouseleave", hide);
+			row.addEventListener("mousemove", move);
+			if (onClick) {
+				row.addEventListener("click", onClick);
+			}
 		};
 
-		row.addEventListener("mouseenter", show);
-		row.addEventListener("mouseleave", hide);
-		row.addEventListener("mousemove", move);
-		if (onClick) {
-			row.addEventListener("click", onClick);
-		}
+		attachPreview({
+			previewId: "#trustai-preview",
+			rowSelector: '[data-preview="trustai"]',
+			onClick: () => {
+				window.open("https://trustai-astro.vercel.app/", "_blank", "noopener");
+			},
+		});
+
+		attachPreview({
+			previewId: "#roka-preview",
+			rowSelector: '[data-preview="roka"]',
+		});
+
+		attachPreview({
+			previewId: "#mit-preview",
+			rowSelector: '[data-preview="mit"]',
+		});
+
+		attachPreview({
+			previewId: "#doraji-preview",
+			rowSelector: '[data-preview="doraji"]',
+			onClick: () => {
+				window.open("https://bandoraji.bandcamp.com/", "_blank", "noopener");
+			},
+		});
 	};
 
-	attachPreview({
-		previewId: "#trustai-preview",
-		rowSelector: '[data-preview="trustai"]',
-		onClick: () => {
-			window.open("https://trustai-astro.vercel.app/", "_blank", "noopener");
-		},
-	});
-
-	attachPreview({
-		previewId: "#roka-preview",
-		rowSelector: '[data-preview="roka"]',
-	});
-
-	attachPreview({
-		previewId: "#mit-preview",
-		rowSelector: '[data-preview="mit"]',
-	});
-
-	attachPreview({
-		previewId: "#doraji-preview",
-		rowSelector: '[data-preview="doraji"]',
-		onClick: () => {
-			window.open("https://bandoraji.bandcamp.com/", "_blank", "noopener");
-		},
-	});
+	document.addEventListener("astro:page-load", initPreviews);
+	if (document.readyState !== "loading") {
+		initPreviews();
+	}
 </script>

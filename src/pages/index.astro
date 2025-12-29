@@ -20,14 +20,23 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 			</h1>
 		</main>
 		<!-- <script type="module" src="/src/hero-preview.js"></script> -->
-		<script>
-			const hong = document.querySelector(".hong");
-			if (hong) {
+		<script is:inline>
+			const initHongToggle = () => {
+				const hong = document.querySelector(".hong");
+				if (!hong || hong.dataset.hongBound === "true") {
+					return;
+				}
+				hong.dataset.hongBound = "true";
 				hong.addEventListener("click", () => {
 					const alt = hong.dataset.alt || "";
 					hong.dataset.alt = hong.textContent || "";
 					hong.textContent = alt;
 				});
+			};
+
+			document.addEventListener("astro:page-load", initHongToggle);
+			if (document.readyState !== "loading") {
+				initHongToggle();
 			}
 		</script>
 	

@@ -26,130 +26,141 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 	}
 	#pdf-bounce.is-hover {
 		outline: 6px solid #4f46e5;
-		outline-offset: 6px;
 		cursor: pointer;
 	}
 </style>
 
-<script>
-	const frame = document.querySelector("#pdf-bounce");
-	if (frame) {
+<script is:inline>
+	const initResume = () => {
+		const frame = document.querySelector("#pdf-bounce");
+		if (!frame || frame.dataset.bounceInit === "true") {
+			return;
+		}
+		frame.dataset.bounceInit = "true";
 		const isMobile = window.matchMedia("(max-width: 768px)");
 		if (isMobile.matches) {
 			frame.style.width = "100vw";
 			frame.style.height = "100vh";
 		} else {
-		const setupFloat = ({
-			element,
-			aspect,
-			maxHeightRatio,
-			maxWidthRatio,
-			minHeight,
-			margin,
-			speedX,
-			speedY,
-		}) => {
-			let width = 0;
-			let height = 0;
-			let x = 0;
-			let y = 0;
-			let vx = speedX;
-			let vy = speedY;
-			let isPaused = false;
-			let isDragging = false;
-			let dragOffsetX = 0;
-			let dragOffsetY = 0;
+			const setupFloat = ({
+				element,
+				aspect,
+				maxHeightRatio,
+				maxWidthRatio,
+				minHeight,
+				margin,
+				speedX,
+				speedY,
+			}) => {
+				let width = 0;
+				let height = 0;
+				let x = 0;
+				let y = 0;
+				let vx = speedX;
+				let vy = speedY;
+				let isPaused = false;
+				let isDragging = false;
+				let dragOffsetX = 0;
+				let dragOffsetY = 0;
 
-			const resize = () => {
-				const maxHeight = window.innerHeight * maxHeightRatio;
-				height = Math.max(minHeight, Math.min(maxHeight, window.innerHeight - margin));
-				width = height * aspect;
-				if (width > window.innerWidth * maxWidthRatio) {
-					width = window.innerWidth * maxWidthRatio;
-					height = width / aspect;
-				}
-				element.style.width = `${width}px`;
-				element.style.height = `${height}px`;
-				x = Math.min(Math.max(0, x), window.innerWidth - width);
-				y = Math.min(Math.max(0, y), window.innerHeight - height);
-			};
-
-			const step = () => {
-				if (!isPaused && !isDragging) {
-					x += vx;
-					y += vy;
-
-				if (x <= 0 || x + width >= window.innerWidth) {
-					vx *= -1;
+				const resize = () => {
+					const maxHeight = window.innerHeight * maxHeightRatio;
+					height = Math.max(
+						minHeight,
+						Math.min(maxHeight, window.innerHeight - margin)
+					);
+					width = height * aspect;
+					if (width > window.innerWidth * maxWidthRatio) {
+						width = window.innerWidth * maxWidthRatio;
+						height = width / aspect;
+					}
+					element.style.width = `${width}px`;
+					element.style.height = `${height}px`;
 					x = Math.min(Math.max(0, x), window.innerWidth - width);
-				}
-				if (y <= 0 || y + height >= window.innerHeight) {
-					vy *= -1;
 					y = Math.min(Math.max(0, y), window.innerHeight - height);
-				}
-				}
+				};
 
-				element.style.transform = `translate(${x}px, ${y}px)`;
+				const step = () => {
+					if (!isPaused && !isDragging) {
+						x += vx;
+						y += vy;
+
+						if (x <= 0 || x + width >= window.innerWidth) {
+							vx *= -1;
+							x = Math.min(Math.max(0, x), window.innerWidth - width);
+						}
+						if (y <= 0 || y + height >= window.innerHeight) {
+							vy *= -1;
+							y = Math.min(Math.max(0, y), window.innerHeight - height);
+						}
+					}
+
+					element.style.transform = `translate(${x}px, ${y}px)`;
+					requestAnimationFrame(step);
+				};
+
+				resize();
+				window.addEventListener("resize", resize);
+				element.addEventListener("mouseenter", () => {
+					isPaused = true;
+					element.classList.add("is-hover");
+				});
+				element.addEventListener("mouseleave", () => {
+					if (!isDragging) {
+						isPaused = false;
+						element.classList.remove("is-hover");
+					}
+				});
+				const startDrag = (event) => {
+					isDragging = true;
+					isPaused = true;
+					const rect = element.getBoundingClientRect();
+					dragOffsetX = event.clientX - rect.left;
+					dragOffsetY = event.clientY - rect.top;
+				};
+				const onDrag = (event) => {
+					if (!isDragging) {
+						return;
+					}
+					x = event.clientX - dragOffsetX;
+					y = event.clientY - dragOffsetY;
+					x = Math.min(Math.max(0, x), window.innerWidth - width);
+					y = Math.min(Math.max(0, y), window.innerHeight - height);
+					element.style.transform = `translate(${x}px, ${y}px)`;
+				};
+				const endDrag = () => {
+					if (!isDragging) {
+						return;
+					}
+					isDragging = false;
+					isPaused = false;
+					element.classList.remove("is-hover");
+				};
+				element.addEventListener("mousedown", startDrag);
+				window.addEventListener("mousemove", onDrag);
+				window.addEventListener("mouseup", endDrag);
 				requestAnimationFrame(step);
 			};
 
-			resize();
-			window.addEventListener("resize", resize);
-			element.addEventListener("mouseenter", () => {
-				isPaused = true;
-				element.classList.add("is-hover");
+			setupFloat({
+				element: frame,
+				aspect: 8.5 / 11,
+				maxHeightRatio: 0.6,
+				maxWidthRatio: 0.75,
+				minHeight: 240,
+				margin: 80,
+				speedX: 1.4,
+				speedY: 1.1,
 			});
-			element.addEventListener("mouseleave", () => {
-				if (!isDragging) {
-					isPaused = false;
-					element.classList.remove("is-hover");
-				}
+			frame.addEventListener("dblclick", () => {
+				window.open("/JustinHong.pdf", "_blank", "noopener");
 			});
-			const startDrag = (event) => {
-				isDragging = true;
-				isPaused = true;
-				const rect = element.getBoundingClientRect();
-				dragOffsetX = event.clientX - rect.left;
-				dragOffsetY = event.clientY - rect.top;
-			};
-			const onDrag = (event) => {
-				if (!isDragging) {
-					return;
-				}
-				x = event.clientX - dragOffsetX;
-				y = event.clientY - dragOffsetY;
-				x = Math.min(Math.max(0, x), window.innerWidth - width);
-				y = Math.min(Math.max(0, y), window.innerHeight - height);
-				element.style.transform = `translate(${x}px, ${y}px)`;
-			};
-			const endDrag = () => {
-				if (!isDragging) {
-					return;
-				}
-				isDragging = false;
-				isPaused = false;
-				element.classList.remove("is-hover");
-			};
-			element.addEventListener("mousedown", startDrag);
-			window.addEventListener("mousemove", onDrag);
-			window.addEventListener("mouseup", endDrag);
-			requestAnimationFrame(step);
-		};
-
-		setupFloat({
-			element: frame,
-			aspect: 8.5 / 11,
-			maxHeightRatio: 0.6,
-			maxWidthRatio: 0.75,
-			minHeight: 240,
-			margin: 80,
-			speedX: 1.4,
-			speedY: 1.1,
-		});
-		frame.addEventListener("dblclick", () => {
-			window.open("/JustinHong.pdf", "_blank", "noopener");
-		});
 		}
+	};
+
+	document.addEventListener("astro:page-load", initResume);
+	if (document.readyState !== "loading") {
+		initResume();
 	}
 </script>
 
