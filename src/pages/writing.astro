@@ -3,7 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout>
-	<main class="mx-auto flex max-w-4xl flex-col gap-8 overflow-hidden px-6 pb-24 pt-12">
+	<main class="mx-auto flex min-h-[calc(100vh-var(--marquee-height)-var(--nav-height))] max-w-4xl items-center justify-center overflow-hidden px-6">
 		<figure class="relative overflow-hidden border border-neutral-200 bg-white">
 			<video
 				class="block h-auto w-full"
@@ -13,9 +13,15 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 				loop
 				playsinline
 			></video>
-			<figcaption class="pointer-events-none absolute left-6 top-6 font-[galmuri7] text-9xl text-white">
+			<figcaption class="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-[galmuri7] text-9xl text-white">
 				WIP
 			</figcaption>
 		</figure>
 	</main>
 </BaseLayout>
+
+<style>
+	:global(body) {
+		overflow: hidden;
+	}
+</style>
