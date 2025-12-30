@@ -6,9 +6,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 		<main
 			class="hero grid min-h-[calc(100vh-var(--marquee-height)-var(--nav-height))] place-items-center"
 		>
-			<h1
-				class="m-0 inline-flex items-center bg-white text-[clamp(12em,16vw,12rem)] leading-none tracking-[0] text-black font-[Galmuri14]"
-			>
+			<div class="flex flex-col items-center">
+				<h1
+					class="m-0 inline-flex items-center bg-white text-[clamp(12em,16vw,12rem)] leading-none tracking-[0] text-black font-[Galmuri14]"
+				>
 				<span class="font-[galmuri7] text-[#000]">j</span
 				><span class=" font-[galmuri7] text-[#000]"
 					>.</span
@@ -17,7 +18,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 					data-alt="홍"
 					>洪</span
 				>
-			</h1>
+				</h1>
+				<p class="mt-3 text-sm font-[galmuri9] text-black md:hidden">
+					(It's better on Desktop)
+				</p>
+			</div>
 		</main>
 		<!-- <script type="module" src="/src/hero-preview.js"></script> -->
 		<script is:inline data-astro-rerun>
