@@ -37,6 +37,9 @@
     body.page-resume #pdf-bounce {
       width: 100vw;
       height: 100vh;
+      max-width: 100vw;
+      max-height: 100vh;
+      box-sizing: border-box;
       transform: none !important;
     }
   }

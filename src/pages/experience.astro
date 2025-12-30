@@ -87,6 +87,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 <script is:inline data-astro-rerun>
 	const initPreviews = () => {
+		if (window.matchMedia("(max-width: 768px)").matches) {
+			return;
+		}
 		const attachPreview = ({ previewId, rowSelector, onClick }) => {
 			const preview = document.querySelector(previewId);
 			const row = document.querySelector(rowSelector);
