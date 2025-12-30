@@ -85,7 +85,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 	class="pointer-events-none fixed left-0 top-0 z-50 hidden w-[240px] -translate-x-1/2 -translate-y-1/2 opacity-0 transition-opacity duration-150"
 />
 
-<script is:inline>
+<script is:inline data-astro-rerun>
 	const initPreviews = () => {
 		const attachPreview = ({ previewId, rowSelector, onClick }) => {
 			const preview = document.querySelector(previewId);

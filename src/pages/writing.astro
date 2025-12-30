@@ -2,7 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout>
+<BaseLayout bodyClass="page-no-scroll page-writing">
 	<main class="mx-auto flex min-h-[calc(100vh-var(--marquee-height)-var(--nav-height))] max-w-4xl items-center justify-center overflow-hidden px-6">
 		<figure class="relative overflow-hidden border border-neutral-200 bg-white">
 			<video
@@ -19,9 +19,3 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 		</figure>
 	</main>
 </BaseLayout>
-
-<style>
-	:global(body) {
-		overflow: hidden;
-	}
-</style>

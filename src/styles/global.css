@@ -16,11 +16,28 @@
     color: #111;
     font-family: "Times New Roman", Times, serif;
   }
+
+  body.page-no-scroll {
+    overflow: hidden;
+  }
 }
 
 @layer components {
   .hero,
   .hero * {
     user-select: none;
+  }
+
+  body.page-resume #pdf-bounce.is-hover {
+    outline: 6px solid #4f46e5;
+    cursor: pointer;
+  }
+
+  @media (max-width: 768px) {
+    body.page-resume #pdf-bounce {
+      width: 100vw;
+      height: 100vh;
+      transform: none !important;
+    }
   }
 }

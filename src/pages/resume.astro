@@ -2,7 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout>
+<BaseLayout bodyClass="page-no-scroll page-resume">
 	<main class="relative h-screen overflow-hidden">
 		<p class="pointer-events-none fixed left-1/2 top-1/2 z-0 -translate-x-1/2 -translate-y-1/2 font-[galmuri7] text-4xl text-neutral-300">
 			Double Click!
@@ -20,17 +20,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 	</main>
 </BaseLayout>
 
-<style>
-	:global(body) {
-		overflow: hidden;
-	}
-	#pdf-bounce.is-hover {
-		outline: 6px solid #4f46e5;
-		cursor: pointer;
-	}
-</style>
-
-<script is:inline>
+<script is:inline data-astro-rerun>
 	const initResume = () => {
 		const frame = document.querySelector("#pdf-bounce");
 		if (!frame || frame.dataset.bounceInit === "true") {
@@ -164,12 +154,3 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 	}
 </script>
 
-<style>
-	@media (max-width: 768px) {
-		#pdf-bounce {
-			width: 100vw;
-			height: 100vh;
-			transform: none !important;
-		}
-	}
-</style>

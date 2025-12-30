@@ -20,7 +20,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 			</h1>
 		</main>
 		<!-- <script type="module" src="/src/hero-preview.js"></script> -->
-		<script is:inline>
+		<script is:inline data-astro-rerun>
 			const initHongToggle = () => {
 				const hong = document.querySelector(".hong");
 				if (!hong || hong.dataset.hongBound === "true") {

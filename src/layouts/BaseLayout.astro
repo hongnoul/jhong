@@ -10,6 +10,7 @@ const navItems = [
 ];
 
 const currentPath = Astro.url.pathname;
+const { bodyClass } = Astro.props;
 ---
 
 <html lang="en">
@@ -31,7 +32,7 @@ const currentPath = Astro.url.pathname;
 		<title>Astro</title>
 		<ViewTransitions />
 	</head>
-	<body>
+	<body class={bodyClass}>
 		<div
 			class="fixed left-0 right-0 top-0 z-[11] flex h-[var(--marquee-height)] overflow-hidden bg-transparent text-black"
 			role="presentation"
