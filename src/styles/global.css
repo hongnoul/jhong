@@ -6,6 +6,7 @@
   :root {
     --marquee-height: 3rem;
     --nav-height: 3rem;
+    --experience-header-height: 2.75rem;
   }
 
   body {
@@ -36,11 +37,42 @@
   @media (max-width: 768px) {
     body.page-resume #pdf-bounce {
       width: 100vw;
-      height: 100vh;
+      height: 100svh;
       max-width: 100vw;
-      max-height: 100vh;
+      max-height: 100svh;
       box-sizing: border-box;
       transform: none !important;
     }
+
+    body.page-resume #pdf-bounce iframe {
+      pointer-events: auto;
+    }
+
+    body.page-resume {
+      overflow: hidden;
+    }
+
+    .experience-table .cell-clamp {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
+    }
+  }
+
+  .experience-table thead tr {
+    height: var(--experience-header-height);
+  }
+
+  .experience-table tbody::before {
+    content: "";
+    display: block;
+    height: var(--experience-header-height);
+  }
+
+  .experience-sticky-cell {
+    position: sticky;
+    top: var(--marquee-height);
+    z-index: 10;
   }
 }

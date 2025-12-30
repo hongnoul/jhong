@@ -5,54 +5,58 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 <BaseLayout>
 	<main class="mx-auto flex max-w-4xl flex-col gap-8">
 
-		<section class="overflow-hidden">
-			<table class="w-full table-auto border-separate border-spacing-0">
+		<section class="overflow-visible">
+			<table class="experience-table w-full table-auto border-separate border-spacing-0">
 				<thead>
 					<tr class="text-[0.7rem] font-semibold uppercase tracking-[0.25em] text-neutral-500">
-						<th class="px-4 py-3 text-left font-[galmuri9]">Year</th>
-						<th class="px-4 py-3 text-left font-[galmuri9]">Client</th>
-						<th class="px-4 py-3 text-left font-[galmuri9]">Location</th>
-						<th class="px-4 py-3 text-left font-[galmuri9]">Scope</th>
+						<th class="experience-sticky-cell hidden px-4 py-3 text-left font-[galmuri11] md:table-cell md:font-[galmuri9]">Year</th>
+						<th class="experience-sticky-cell px-4 py-3 text-left font-[galmuri11] md:font-[galmuri9]">Client</th>
+						<th class="experience-sticky-cell hidden px-4 py-3 text-left font-[galmuri11] md:table-cell md:font-[galmuri9]">Location</th>
+						<th class="experience-sticky-cell px-4 py-3 text-left font-[galmuri11] md:font-[galmuri9]">Scope</th>
 					</tr>
 				</thead>
-				<tbody class="text-xl font-[galmuri9] text-neutral-900">
+				<tbody class="text-xl font-[galmuri11] text-neutral-900 md:font-[galmuri9]">
 					<tr
 						class="group border-t border-neutral-200 transition-colors duration-200 hover:cursor-pointer hover:bg-indigo-600 hover:text-white"
 						data-preview="trustai"
 					>
-						<td class="px-4 pb-24 pt-6">2025</td>
-						<td class="px-4 pb-24 pt-6">TrustAI</td>
-						<td class="px-4 pb-24 pt-6">San Francisco, CA</td>
+						<td class="hidden px-4 pb-24 pt-6 md:table-cell"><span class="cell-clamp">2025</span></td>
+						<td class="px-4 pb-24 pt-6"><span class="cell-clamp">TrustAI</span></td>
+						<td class="hidden px-4 pb-24 pt-6 md:table-cell"><span class="cell-clamp">San Francisco, CA</span></td>
 						<td class="px-4 pb-24 pt-6">
-							Product Management, <br>Logo & Website Design
+							<span class="cell-clamp">Product Management, <br>Logo & Website Design</span>
 						</td>
 					</tr>
 					<tr
 						class="group border-t border-neutral-200 transition-colors duration-200 hover:cursor-pointer hover:bg-indigo-600 hover:text-white"
 						data-preview="roka"
 					>
-						<td class="px-4 pb-24 pt-6">2024</td>
-						<td class="px-4 pb-24 pt-6">Republic of Korea Army</td>
-						<td class="px-4 pb-24 pt-6">Yeoncheon, <br>South Korea</td>
-						<td class="px-4 pb-24 pt-6">Call of Duty</td>
+						<td class="hidden px-4 pb-24 pt-6 md:table-cell"><span class="cell-clamp">2024</span></td>
+						<td class="px-4 pb-24 pt-6"><span class="cell-clamp">Republic of Korea Army</span></td>
+						<td class="hidden px-4 pb-24 pt-6 md:table-cell">
+							<span class="cell-clamp">Yeoncheon, <br>South Korea</span>
+						</td>
+						<td class="px-4 pb-24 pt-6"><span class="cell-clamp">Call of Duty</span></td>
 					</tr>
 					<tr
 						class="group border-t border-neutral-200 transition-colors duration-200 hover:cursor-pointer hover:bg-indigo-600 hover:text-white"
 						data-preview="mit"
 					>
-						<td class="px-4 pb-24 pt-6">2024</td>
-						<td class="px-4 pb-24 pt-6">History at MIT</td>
-						<td class="px-4 pb-24 pt-6">Cambridge, MA</td>
-						<td class="px-4 pb-24 pt-6">Web Exhibit</td>
+						<td class="hidden px-4 pb-24 pt-6 md:table-cell"><span class="cell-clamp">2024</span></td>
+						<td class="px-4 pb-24 pt-6"><span class="cell-clamp">History at MIT</span></td>
+						<td class="hidden px-4 pb-24 pt-6 md:table-cell"><span class="cell-clamp">Cambridge, MA</span></td>
+						<td class="px-4 pb-24 pt-6"><span class="cell-clamp">Web Exhibit</span></td>
 					</tr>
 					<tr
 						class="group border-t border-neutral-200 transition-colors duration-200 hover:cursor-pointer hover:bg-indigo-600 hover:text-white"
 						data-preview="doraji"
 					>
-						<td class="px-4 pb-24 pt-6">2024</td>
-						<td class="px-4 pb-24 pt-6">Doraji</td>
-						<td class="px-4 pb-24 pt-6">Seoul, <br>South Korea</td>
-						<td class="px-4 pb-24 pt-6">Music Production</td>
+						<td class="hidden px-4 pb-24 pt-6 md:table-cell"><span class="cell-clamp">2024</span></td>
+						<td class="px-4 pb-24 pt-6"><span class="cell-clamp">Doraji</span></td>
+						<td class="hidden px-4 pb-24 pt-6 md:table-cell">
+							<span class="cell-clamp">Seoul, <br>South Korea</span>
+						</td>
+						<td class="px-4 pb-24 pt-6"><span class="cell-clamp">Music Production</span></td>
 					</tr>
 				</tbody>
 			</table>
