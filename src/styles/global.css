@@ -4,18 +4,16 @@
 
 @layer base {
   :root {
-    --marquee-height: 3rem;
     --nav-height: 3rem;
     --experience-header-height: 2.75rem;
   }
 
   body {
     margin: 0;
-    padding-top: var(--marquee-height);
     padding-bottom: var(--nav-height);
     background: #fff;
     color: #111;
-    font-family: "Times New Roman", Times, serif;
+    font-family: "NeoDunggeunmo Code", "Gugi", Helvetica, Arial, sans-serif;
   }
 
   body.page-no-scroll {
@@ -27,6 +25,7 @@
   .hero,
   .hero * {
     user-select: none;
+    font-style: normal;
   }
 
   body.page-resume #pdf-bounce.is-hover {
@@ -72,7 +71,7 @@
 
   .experience-sticky-cell {
     position: sticky;
-    top: var(--marquee-height);
+    top: 0;
     z-index: 10;
   }
 

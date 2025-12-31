@@ -4,17 +4,17 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 <BaseLayout>
 		<main
-			class="hero grid min-h-[calc(100vh-var(--marquee-height)-var(--nav-height))] place-items-center"
+			class="hero grid min-h-[calc(100vh-var(--nav-height))] place-items-center overflow-hidden"
 		>
 			<div class="flex flex-col items-center">
 				<h1
-					class="m-0 inline-flex items-center bg-white text-[clamp(12em,16vw,12rem)] leading-none tracking-[0] text-black font-[Galmuri14]"
+					class="m-0 inline-flex items-center bg-white text-[clamp(12rem,20vw,100vw)] leading-none tracking-[0] text-black font-[Galmuri14] lg:text-[clamp(18rem,24vw,30rem)]"
 				>
 				<span class="font-[galmuri7] text-[#000]">j</span
 				><span class=" font-[galmuri7] text-[#000]"
 					>.</span
 				><span
-					class="hong inline-block font-[Galmuri7] text-[#000] transition-[font-size] duration-[240ms] ease-in-out lg:hover:text-[1.75em]"
+					class="hong inline-block font-[Galmuri7] text-[#000] transition-[font-size] duration-[200ms] ease-in-out lg:hover:text-[1.75em]"
 					data-alt="홍"
 					>洪</span
 				>
@@ -23,16 +23,36 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 		</main>
 
 		<script is:inline data-astro-rerun>
+			const syncNavLanguage = (useKorean) => {
+				localStorage.setItem("nav-lang", useKorean ? "ko" : "en");
+				document
+					.querySelectorAll('nav[aria-label="Primary"] a[data-label-en]')
+					.forEach((link) => {
+						const label = useKorean
+							? link.dataset.labelKo
+							: link.dataset.labelEn;
+						if (label) {
+							link.textContent = label;
+						}
+					});
+			};
+
 			const initHongToggle = () => {
 				const hong = document.querySelector(".hong");
 				if (!hong || hong.dataset.hongBound === "true") {
 					return;
 				}
 				hong.dataset.hongBound = "true";
+				if (hong.dataset.korean !== "true") {
+					hong.dataset.korean = "false";
+				}
 				hong.addEventListener("click", () => {
 					const alt = hong.dataset.alt || "";
 					hong.dataset.alt = hong.textContent || "";
 					hong.textContent = alt;
+					const nextIsKorean = hong.dataset.korean !== "true";
+					hong.dataset.korean = nextIsKorean ? "true" : "false";
+					syncNavLanguage(nextIsKorean);
 				});
 			};
 
