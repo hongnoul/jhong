@@ -29,6 +29,8 @@ const portfolioFiles = fs
 					<tr
 						class="group border-t border-neutral-200 transition-colors duration-200 hover:cursor-pointer hover:bg-white hover:text-black"
 						data-preview="trustai"
+						data-has-link="true"
+						data-link="https://trustai-astro.vercel.app/"
 					>
 						<td class="hidden px-4 pb-24 pt-6 md:table-cell"><span class="cell-clamp">2025</span></td>
 						<td class="px-4 pb-24 pt-6"><span class="cell-clamp">TrustAI</span></td>
@@ -60,6 +62,8 @@ const portfolioFiles = fs
 					<tr
 						class="group border-t border-neutral-200 transition-colors duration-200 hover:cursor-pointer hover:bg-white hover:text-black"
 						data-preview="doraji"
+						data-has-link="true"
+						data-link="https://bandoraji.bandcamp.com/"
 					>
 						<td class="hidden px-4 pb-24 pt-6 md:table-cell"><span class="cell-clamp">2024</span></td>
 						<td class="px-4 pb-24 pt-6"><span class="cell-clamp">Doraji</span></td>
@@ -175,8 +179,11 @@ const portfolioFiles = fs
 		attachPreview({
 			previewId: "#trustai-preview",
 			rowSelector: '[data-preview="trustai"]',
-			onClick: () => {
-				window.open("https://trustai-astro.vercel.app/", "_blank", "noopener");
+			onClick: (event) => {
+				const url = event.currentTarget?.dataset?.link;
+				if (url) {
+					window.open(url, "_blank", "noopener");
+				}
 			},
 		});
 
@@ -193,8 +200,11 @@ const portfolioFiles = fs
 		attachPreview({
 			previewId: "#doraji-preview",
 			rowSelector: '[data-preview="doraji"]',
-			onClick: () => {
-				window.open("https://bandoraji.bandcamp.com/", "_blank", "noopener");
+			onClick: (event) => {
+				const url = event.currentTarget?.dataset?.link;
+				if (url) {
+					window.open(url, "_blank", "noopener");
+				}
 			},
 		});
 
@@ -229,13 +239,12 @@ const portfolioFiles = fs
 		initPortfolioToggle();
 	}
 
-	const initPortfolioViewer = () => {
+	const getViewer = () => {
 		const viewer = document.querySelector("[data-portfolio-viewer]");
 		const viewerImg = viewer?.querySelector("img");
-		if (!viewer || !viewerImg || viewer.dataset.viewerBound === "true") {
-			return;
+		if (!viewer || !viewerImg) {
+			return null;
 		}
-		viewer.dataset.viewerBound = "true";
 
 		const open = (src, alt) => {
 			viewerImg.src = src;
@@ -257,6 +266,17 @@ const portfolioFiles = fs
 			}, 150);
 		};
 
+		return { viewer, viewerImg, open, close };
+	};
+
+	const initPortfolioViewer = () => {
+		const viewerState = getViewer();
+		if (!viewerState || viewerState.viewer.dataset.viewerBound === "true") {
+			return;
+		}
+		const { viewer, open, close } = viewerState;
+		viewer.dataset.viewerBound = "true";
+
 		document.querySelectorAll("[data-portfolio-image]").forEach((img) => {
 			if (img.dataset.viewerBound === "true") return;
 			img.dataset.viewerBound = "true";
@@ -275,6 +295,45 @@ const portfolioFiles = fs
 	document.addEventListener("astro:page-load", initPortfolioViewer);
 	if (document.readyState !== "loading") {
 		initPortfolioViewer();
+	}
+
+	const initMobileRowPreview = () => {
+		if (!window.matchMedia("(max-width: 768px)").matches) {
+			return;
+		}
+		const viewerState = getViewer();
+		if (!viewerState) {
+			return;
+		}
+		const { open } = viewerState;
+			document
+				.querySelectorAll(
+					'[data-preview]:not([data-has-link]):not([data-expand])'
+				)
+				.forEach((row) => {
+					if (row.dataset.mobilePreviewBound === "true") return;
+					row.dataset.mobilePreviewBound = "true";
+					row.addEventListener("click", () => {
+						const key = row.dataset.preview;
+						const preview = key
+							? document.querySelector(`#${key}-preview`)
+							: null;
+						if (!preview) return;
+						open(preview.src, preview.alt);
+					});
+				});
+			document.querySelectorAll("[data-has-link][data-link]").forEach((row) => {
+				if (row.dataset.mobileLinkBound === "true") return;
+				row.dataset.mobileLinkBound = "true";
+				row.addEventListener("click", () => {
+					window.open(row.dataset.link, "_blank", "noopener");
+				});
+			});
+	};
+
+	document.addEventListener("astro:page-load", initMobileRowPreview);
+	if (document.readyState !== "loading") {
+		initMobileRowPreview();
 	}
 </script>
 

@@ -46,6 +46,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 				if (hong.dataset.korean !== "true") {
 					hong.dataset.korean = "false";
 				}
+				syncNavLanguage(hong.dataset.korean === "true");
 				hong.addEventListener("click", () => {
 					const alt = hong.dataset.alt || "";
 					hong.dataset.alt = hong.textContent || "";
