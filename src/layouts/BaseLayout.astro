@@ -67,7 +67,7 @@ const currentPath = Astro.url.pathname;
 							: currentPath.startsWith(item.href);
 					return (
 						<a
-							class={`cursor-pointer bg-transparent p-0 text-xl lowercase tracking-[0.08em] text-black hover:underline hover:decoration-2 ${
+							class={`cursor-pointer bg-transparent p-0 text-xl lowercase tracking-[0.08em] text-white hover:underline hover:decoration-2 ${
 								isActive ? "underline decoration-2" : ""
 							}`}
 							href={item.href}
