@@ -1,5 +1,15 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import fs from "node:fs";
+import path from "node:path";
+
+const portfolioDir = new URL("../../public/portfolio", import.meta.url);
+const portfolioFiles = fs
+	.readdirSync(portfolioDir, { withFileTypes: true })
+	.filter((entry) => entry.isFile())
+	.map((entry) => entry.name)
+	.filter((name) => [".jpg", ".jpeg", ".png", ".webp"].includes(path.extname(name).toLowerCase()))
+	.sort((a, b) => a.localeCompare(b, "en", { numeric: true }));
 ---
 
 <BaseLayout>
@@ -10,7 +20,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 				<thead>
 					<tr class="text-[0.7rem] font-semibold uppercase tracking-[0.25em] text-white">
 						<th class="experience-sticky-cell hidden px-4 py-3 text-left md:table-cell">Year</th>
-						<th class="experience-sticky-cell px-4 py-3 text-left">Client</th>
+						<th class="experience-sticky-cell px-4 py-3 text-left">Client/Subject</th>
 						<th class="experience-sticky-cell hidden px-4 py-3 text-left md:table-cell">Location</th>
 						<th class="experience-sticky-cell px-4 py-3 text-left">Scope</th>
 					</tr>
@@ -34,7 +44,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 						<td class="hidden px-4 pb-24 pt-6 md:table-cell"><span class="cell-clamp">2024</span></td>
 						<td class="px-4 pb-24 pt-6"><span class="cell-clamp">Republic of Korea Army</span></td>
 						<td class="hidden px-4 pb-24 pt-6 md:table-cell">
-							<span class="cell-clamp">Yeoncheon, <br>South Korea</span>
+							<span class="cell-clamp">Yeoncheon, KR</span>
 						</td>
 						<td class="px-4 pb-24 pt-6"><span class="cell-clamp">Call of Duty</span></td>
 					</tr>
@@ -54,9 +64,35 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 						<td class="hidden px-4 pb-24 pt-6 md:table-cell"><span class="cell-clamp">2024</span></td>
 						<td class="px-4 pb-24 pt-6"><span class="cell-clamp">Doraji</span></td>
 						<td class="hidden px-4 pb-24 pt-6 md:table-cell">
-							<span class="cell-clamp">Seoul, <br>South Korea</span>
+							<span class="cell-clamp">Seoul, KR</span>
 						</td>
 						<td class="px-4 pb-24 pt-6"><span class="cell-clamp">Music Production</span></td>
+					</tr>
+					<tr
+						class="group border-t border-neutral-200 transition-colors duration-200 hover:cursor-pointer hover:bg-white hover:text-black"
+						data-expand="portfolio"
+						data-preview="portfolio"
+						aria-expanded="false"
+					>
+						<td class="hidden px-4 pb-24 pt-6 md:table-cell"><span class="cell-clamp">2022</span></td>
+						<td class="px-4 pb-24 pt-6"><span class="cell-clamp">AP Studio Art: 3D</span></td>
+						<td class="hidden px-4 pb-24 pt-6 md:table-cell"><span class="cell-clamp">Seoul, KR</span></td>
+						<td class="px-4 pb-24 pt-6"><span class="cell-clamp">Portfolio</span></td>
+					</tr>
+					<tr class="hidden border-t border-neutral-200" data-expand-content="portfolio">
+						<td colSpan="4" class="px-4 pb-10 pt-2">
+							<div class="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+								{portfolioFiles.map((file) => (
+									<img
+										src={`/portfolio/${file}`}
+										alt={`AP Studio Art ${file}`}
+										class="h-48 w-full cursor-zoom-in object-cover"
+										loading="lazy"
+										data-portfolio-image
+									/>
+								))}
+							</div>
+						</td>
 					</tr>
 				</tbody>
 			</table>
@@ -87,6 +123,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 	src="/doraji.webp"
 	alt="Doraji"
 	class="pointer-events-none fixed left-0 top-0 z-50 hidden w-[240px] -translate-x-1/2 -translate-y-1/2 opacity-0 transition-opacity duration-150"
+/>
+<img
+	id="portfolio-preview"
+	src="/portfolio.webp"
+	alt="AP Studio Art Portfolio"
+	class="pointer-events-none fixed left-0 top-0 z-50 hidden w-[360px] -translate-x-1/2 -translate-y-1/2 opacity-0 transition-opacity duration-150"
 />
 
 <script is:inline data-astro-rerun>
@@ -155,10 +197,90 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 				window.open("https://bandoraji.bandcamp.com/", "_blank", "noopener");
 			},
 		});
+
+		attachPreview({
+			previewId: "#portfolio-preview",
+			rowSelector: '[data-preview="portfolio"]',
+		});
 	};
 
 	document.addEventListener("astro:page-load", initPreviews);
 	if (document.readyState !== "loading") {
 		initPreviews();
 	}
+
+	const initPortfolioToggle = () => {
+		const row = document.querySelector('[data-expand="portfolio"]');
+		const contentRow = document.querySelector('[data-expand-content="portfolio"]');
+		if (!row || !contentRow || row.dataset.expandBound === "true") {
+			return;
+		}
+		row.dataset.expandBound = "true";
+
+		row.addEventListener("click", () => {
+			const isOpen = row.getAttribute("aria-expanded") === "true";
+			row.setAttribute("aria-expanded", isOpen ? "false" : "true");
+			contentRow.classList.toggle("hidden", isOpen);
+		});
+	};
+
+	document.addEventListener("astro:page-load", initPortfolioToggle);
+	if (document.readyState !== "loading") {
+		initPortfolioToggle();
+	}
+
+	const initPortfolioViewer = () => {
+		const viewer = document.querySelector("[data-portfolio-viewer]");
+		const viewerImg = viewer?.querySelector("img");
+		if (!viewer || !viewerImg || viewer.dataset.viewerBound === "true") {
+			return;
+		}
+		viewer.dataset.viewerBound = "true";
+
+		const open = (src, alt) => {
+			viewerImg.src = src;
+			viewerImg.alt = alt || "";
+			viewer.classList.remove("hidden");
+			requestAnimationFrame(() => {
+				viewer.classList.remove("opacity-0");
+				viewer.classList.add("opacity-100");
+			});
+		};
+
+		const close = () => {
+			viewer.classList.remove("opacity-100");
+			viewer.classList.add("opacity-0");
+			setTimeout(() => {
+				viewer.classList.add("hidden");
+				viewerImg.src = "";
+				viewerImg.alt = "";
+			}, 150);
+		};
+
+		document.querySelectorAll("[data-portfolio-image]").forEach((img) => {
+			if (img.dataset.viewerBound === "true") return;
+			img.dataset.viewerBound = "true";
+			img.addEventListener("click", () => {
+				open(img.currentSrc || img.src, img.alt);
+			});
+		});
+
+		viewer.addEventListener("click", (event) => {
+			if (event.target === viewer) {
+				close();
+			}
+		});
+	};
+
+	document.addEventListener("astro:page-load", initPortfolioViewer);
+	if (document.readyState !== "loading") {
+		initPortfolioViewer();
+	}
 </script>
+
+<div
+	class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/80 opacity-0 transition-opacity duration-150"
+	data-portfolio-viewer
+>
+	<img class="max-h-[90vh] max-w-[90vw] object-contain" alt="" />
+</div>
