@@ -5,11 +5,11 @@ import { ClientRouter } from "astro:transitions";
 const navItems = [
 	{ label: "home", labelKo: "홈", href: "/" },
 	{ label: "experience", labelKo: "경험", href: "/experience" },
-	{ label: "about me", labelKo: "소개", href: "/writing" },
 	{ label: "résumé", labelKo: "이력서", href: "/resume" },
 ];
 
 const currentPath = Astro.url.pathname;
+const isResumePage = currentPath.startsWith("/resume");
 ---
 
 <html lang="en">
@@ -29,7 +29,7 @@ const currentPath = Astro.url.pathname;
 		<title>Justin Hong</title>
 		<ClientRouter />
 	</head>
-	<body>
+	<body class={Astro.props.bodyClass}>
 		<script is:inline data-astro-rerun>
 			const applyNavLanguage = () => {
 				const useKorean = localStorage.getItem("nav-lang") === "ko";
@@ -69,7 +69,7 @@ const currentPath = Astro.url.pathname;
 						<a
 							class={`cursor-pointer bg-transparent p-0 text-xl lowercase tracking-[0.08em] text-white hover:underline hover:decoration-2 ${
 								isActive ? "underline decoration-2" : ""
-							}`}
+							} ${isResumePage ? "text-black md:text-white" : ""}`}
 							href={item.href}
 							aria-current={isActive ? "page" : undefined}
 							data-label-en={item.label}
