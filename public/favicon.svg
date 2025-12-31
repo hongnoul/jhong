@@ -1,96 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14" shape-rendering="crispEdges">
-  <g fill="#000">
-  <rect x="0" y="1" width="1" height="1" />
-  <rect x="1" y="1" width="1" height="1" />
-  <rect x="6" y="1" width="1" height="1" />
-  <rect x="7" y="1" width="1" height="1" />
-  <rect x="10" y="1" width="1" height="1" />
-  <rect x="11" y="1" width="1" height="1" />
-  <rect x="2" y="2" width="1" height="1" />
-  <rect x="3" y="2" width="1" height="1" />
-  <rect x="4" y="2" width="1" height="1" />
-  <rect x="5" y="2" width="1" height="1" />
-  <rect x="6" y="2" width="1" height="1" />
-  <rect x="7" y="2" width="1" height="1" />
-  <rect x="8" y="2" width="1" height="1" />
-  <rect x="9" y="2" width="1" height="1" />
-  <rect x="10" y="2" width="1" height="1" />
-  <rect x="11" y="2" width="1" height="1" />
-  <rect x="12" y="2" width="1" height="1" />
-  <rect x="2" y="3" width="1" height="1" />
-  <rect x="3" y="3" width="1" height="1" />
-  <rect x="4" y="3" width="1" height="1" />
-  <rect x="5" y="3" width="1" height="1" />
-  <rect x="6" y="3" width="1" height="1" />
-  <rect x="7" y="3" width="1" height="1" />
-  <rect x="8" y="3" width="1" height="1" />
-  <rect x="9" y="3" width="1" height="1" />
-  <rect x="10" y="3" width="1" height="1" />
-  <rect x="11" y="3" width="1" height="1" />
-  <rect x="12" y="3" width="1" height="1" />
-  <rect x="13" y="3" width="1" height="1" />
-  <rect x="1" y="4" width="1" height="1" />
-  <rect x="6" y="4" width="1" height="1" />
-  <rect x="7" y="4" width="1" height="1" />
-  <rect x="10" y="4" width="1" height="1" />
-  <rect x="11" y="4" width="1" height="1" />
-  <rect x="0" y="5" width="1" height="1" />
-  <rect x="1" y="5" width="1" height="1" />
-  <rect x="6" y="5" width="1" height="1" />
-  <rect x="7" y="5" width="1" height="1" />
-  <rect x="10" y="5" width="1" height="1" />
-  <rect x="11" y="5" width="1" height="1" />
-  <rect x="2" y="6" width="1" height="1" />
-  <rect x="3" y="6" width="1" height="1" />
-  <rect x="6" y="6" width="1" height="1" />
-  <rect x="7" y="6" width="1" height="1" />
-  <rect x="10" y="6" width="1" height="1" />
-  <rect x="11" y="6" width="1" height="1" />
-  <rect x="2" y="7" width="1" height="1" />
-  <rect x="3" y="7" width="1" height="1" />
-  <rect x="6" y="7" width="1" height="1" />
-  <rect x="7" y="7" width="1" height="1" />
-  <rect x="10" y="7" width="1" height="1" />
-  <rect x="11" y="7" width="1" height="1" />
-  <rect x="4" y="8" width="1" height="1" />
-  <rect x="5" y="8" width="1" height="1" />
-  <rect x="6" y="8" width="1" height="1" />
-  <rect x="7" y="8" width="1" height="1" />
-  <rect x="8" y="8" width="1" height="1" />
-  <rect x="9" y="8" width="1" height="1" />
-  <rect x="10" y="8" width="1" height="1" />
-  <rect x="11" y="8" width="1" height="1" />
-  <rect x="12" y="8" width="1" height="1" />
-  <rect x="13" y="8" width="1" height="1" />
-  <rect x="4" y="9" width="1" height="1" />
-  <rect x="5" y="9" width="1" height="1" />
-  <rect x="6" y="9" width="1" height="1" />
-  <rect x="7" y="9" width="1" height="1" />
-  <rect x="8" y="9" width="1" height="1" />
-  <rect x="9" y="9" width="1" height="1" />
-  <rect x="10" y="9" width="1" height="1" />
-  <rect x="11" y="9" width="1" height="1" />
-  <rect x="12" y="9" width="1" height="1" />
-  <rect x="2" y="10" width="1" height="1" />
-  <rect x="3" y="10" width="1" height="1" />
-  <rect x="6" y="10" width="1" height="1" />
-  <rect x="7" y="10" width="1" height="1" />
-  <rect x="10" y="10" width="1" height="1" />
-  <rect x="11" y="10" width="1" height="1" />
-  <rect x="2" y="11" width="1" height="1" />
-  <rect x="3" y="11" width="1" height="1" />
-  <rect x="6" y="11" width="1" height="1" />
-  <rect x="7" y="11" width="1" height="1" />
-  <rect x="10" y="11" width="1" height="1" />
-  <rect x="11" y="11" width="1" height="1" />
-  <rect x="0" y="12" width="1" height="1" />
-  <rect x="1" y="12" width="1" height="1" />
-  <rect x="4" y="12" width="1" height="1" />
-  <rect x="5" y="12" width="1" height="1" />
-  <rect x="12" y="12" width="1" height="1" />
-  <rect x="13" y="12" width="1" height="1" />
-  <rect x="1" y="13" width="1" height="1" />
-  <rect x="5" y="13" width="1" height="1" />
-  <rect x="12" y="13" width="1" height="1" />
-  </g>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="1596" height="1596">
+<path d="M0 0 C75.24 0 150.48 0 228 0 C228 75.24 228 150.48 228 228 C303.24 228 378.48 228 456 228 C456 152.76 456 77.52 456 0 C531.24 0 606.48 0 684 0 C684 75.24 684 150.48 684 228 C759.24 228 834.48 228 912 228 C912 303.24 912 378.48 912 456 C836.76 456 761.52 456 684 456 C684 606.48 684 756.96 684 912 C759.24 912 834.48 912 912 912 C912 987.24 912 1062.48 912 1140 C836.76 1140 761.52 1140 684 1140 C684 1215.24 684 1290.48 684 1368 C608.76 1368 533.52 1368 456 1368 C456 1292.76 456 1217.52 456 1140 C380.76 1140 305.52 1140 228 1140 C228 1215.24 228 1290.48 228 1368 C152.76 1368 77.52 1368 0 1368 C0 1292.76 0 1217.52 0 1140 C-75.24 1140 -150.48 1140 -228 1140 C-228 1064.76 -228 989.52 -228 912 C-152.76 912 -77.52 912 0 912 C0 761.52 0 611.04 0 456 C-150.48 456 -300.96 456 -456 456 C-456 380.76 -456 305.52 -456 228 C-305.52 228 -155.04 228 0 228 C0 152.76 0 77.52 0 0 Z M228 456 C228 606.48 228 756.96 228 912 C303.24 912 378.48 912 456 912 C456 761.52 456 611.04 456 456 C380.76 456 305.52 456 228 456 Z " fill="#000000" transform="translate(684,0)"/>
+<path d="M0 0 C75.24 0 150.48 0 228 0 C228 75.24 228 150.48 228 228 C152.76 228 77.52 228 0 228 C0 152.76 0 77.52 0 0 Z " fill="#000000" transform="translate(1368,1368)"/>
+<path d="M0 0 C75.24 0 150.48 0 228 0 C228 75.24 228 150.48 228 228 C152.76 228 77.52 228 0 228 C0 152.76 0 77.52 0 0 Z " fill="#000000" transform="translate(456,1368)"/>
+<path d="M0 0 C75.24 0 150.48 0 228 0 C228 75.24 228 150.48 228 228 C152.76 228 77.52 228 0 228 C0 152.76 0 77.52 0 0 Z " fill="#010000" transform="translate(0,1368)"/>
+<path d="M0 0 C75.24 0 150.48 0 228 0 C228 75.24 228 150.48 228 228 C152.76 228 77.52 228 0 228 C0 152.76 0 77.52 0 0 Z " fill="#000000" transform="translate(228,1140)"/>
+<path d="M0 0 C75.24 0 150.48 0 228 0 C228 75.24 228 150.48 228 228 C152.76 228 77.52 228 0 228 C0 152.76 0 77.52 0 0 Z " fill="#000000" transform="translate(228,684)"/>
+<path d="M0 0 C75.24 0 150.48 0 228 0 C228 75.24 228 150.48 228 228 C152.76 228 77.52 228 0 228 C0 152.76 0 77.52 0 0 Z " fill="#010000" transform="translate(0,456)"/>
+<path d="M0 0 C75.24 0 150.48 0 228 0 C228 75.24 228 150.48 228 228 C152.76 228 77.52 228 0 228 C0 152.76 0 77.52 0 0 Z " fill="#000000" transform="translate(0,0)"/>
 </svg>

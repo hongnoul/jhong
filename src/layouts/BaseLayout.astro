@@ -1,6 +1,8 @@
 ---
 import "../styles/global.css";
-import { ViewTransitions } from "astro:transitions";
+import { ClientRouter } from "astro:transitions";
+import Marquee from "../components/Marquee.astro"
+import MotionMarquee from "../components/MotionMarquee.astro"
 
 const navItems = [
 	{ label: "home", href: "/" },
@@ -10,7 +12,6 @@ const navItems = [
 ];
 
 const currentPath = Astro.url.pathname;
-const { bodyClass } = Astro.props;
 ---
 
 <html lang="en">
@@ -30,46 +31,13 @@ const { bodyClass } = Astro.props;
 			href="https://cdn.jsdelivr.net/npm/galmuri/dist/galmuri.css"
 		/>
 		<title>Justin Hong</title>
-		<ViewTransitions />
+		<ClientRouter />
 	</head>
-	<body class={bodyClass}>
-		<div
-			class="fixed left-0 right-0 top-0 z-[11] flex h-[var(--marquee-height)] overflow-hidden bg-transparent text-black"
-			role="presentation"
-			aria-hidden="true"
-			transition:persist
-			transition:name="site-marquee"
-			transition:animate="none"
-		>
-			<div
-				class="flex min-w-full flex-none items-center gap-10 whitespace-nowrap pl-10 font-[galmuri9] text-[1.1rem] lowercase tracking-[0.18em] animate-marquee"
-				transition:persist
-				transition:name="marquee-row-a"
-			>
-				<span>Seoul, KR</span>
-				<span>namyang@mit.edu</span>
-				<span>U.S. Citizen</span>
-				<span>namyang@mit.edu</span>
-				<span>Boston, MA</span>
-				<span>namyang@mit.edu</span>
-				<span>$jhong.sol</span>
-				<span>namyang@mit.edu</span>
-			</div>
-			<div
-				class="flex min-w-full flex-none items-center gap-10 whitespace-nowrap pl-10 font-[galmuri9] text-[1.1rem] lowercase tracking-[0.18em] animate-marquee"
-				transition:persist
-				transition:name="marquee-row-b"
-			>
-				<span>Seoul, KR</span>
-				<span>namyang@mit.edu</span>
-				<span>U.S. Citizen</span>
-				<span>namyang@mit.edu</span>
-				<span>Boston, MA</span>
-				<span>namyang@mit.edu</span>
-				<span>$jhong.sol</span>
-				<span>namyang@mit.edu</span>
-			</div>
-		</div>
+	<body>
+		<MotionMarquee />
+		<main id="page">
+			<slot />
+		</main>
 		<nav
 			class="fixed bottom-0 left-0 right-0 z-10 flex h-[var(--nav-height)] items-center bg-transparent"
 			aria-label="Primary"
@@ -96,6 +64,6 @@ const { bodyClass } = Astro.props;
 				})}
 			</div>
 		</nav>
-		<slot />
+
 	</body>
 </html>
