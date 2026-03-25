@@ -133,6 +133,7 @@ canvas.addEventListener('wheel', e => {
 
 canvas.addEventListener('mousedown', e => {
   dragging = true; lastMX = e.clientX; lastMY = e.clientY; velX = velY = 0;
+  canvas.style.cursor = 'grabbing';
 });
 window.addEventListener('mousemove', e => {
   if (!dragging) return;
@@ -140,7 +141,7 @@ window.addEventListener('mousemove', e => {
   panX += velX; panY += velY;
   lastMX = e.clientX; lastMY = e.clientY;
 });
-window.addEventListener('mouseup', () => { dragging = false; });
+window.addEventListener('mouseup', () => { dragging = false; canvas.style.cursor = 'grab'; });
 
 canvas.addEventListener('touchstart', e => {
   dragging = true; lastMX = e.touches[0].clientX; lastMY = e.touches[0].clientY; velX = velY = 0;
