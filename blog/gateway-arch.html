@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+  <script src="/favicon.js"></script>
+  <title>Modified Catenary Model in the St. Louis Gateway Arch — Justin Hong</title>
+  <meta name="description" content="Mathematical analysis of the Gateway Arch's modified catenary centerline, with parametric design variations generated in Grasshopper 3D.">
+  <meta name="author" content="Justin Hong">
+  <link rel="canonical" href="https://hongnoul.github.io/blog/gateway-arch.html">
+  <meta property="og:title" content="Modified Catenary Model in the St. Louis Gateway Arch — Justin Hong">
+  <meta property="og:description" content="Mathematical analysis of the Gateway Arch's modified catenary centerline, with parametric design variations generated in Grasshopper 3D.">
+  <meta property="og:url" content="https://hongnoul.github.io/blog/gateway-arch.html">
+  <meta property="og:type" content="article">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Modified Catenary Model in the St. Louis Gateway Arch — Justin Hong">
+  <meta name="twitter:description" content="Mathematical analysis of the Gateway Arch's modified catenary centerline, with parametric design variations generated in Grasshopper 3D.">
+  <style>
+    .math-inline { height: 1.1em; vertical-align: middle; display: inline; }
+    .fig-row { display: flex; gap: 16px; margin: 16px 0 4px; align-items: flex-start; }
+    .fig-row > div { flex: 1; min-width: 0; text-align: center; }
+    .fig-row > img { flex: 1; min-width: 0; width: 0; }
+    .fig-full { width: 100%; display: block; border-radius: 2px; margin: 16px 0 4px; }
+  </style>
+</head>
+<body>
+  <canvas id="c"></canvas>
+
+  <div class="post-page">
+    <div class="post-body">
+
+      <h1>Modified Catenary Model in the<br>St. Louis Gateway Arch</h1>
+      <p class="authors">Justin Hong</p>
+      <p class="affiliation">July 2022</p>
+
+      <div class="abstract">
+        <p class="abstract-label">Abstract</p>
+        <p>모더니스트 건축가 에로 사리넨(Eero Saarinen)이 설계한 미주리주 세인트루이스의 게이트웨이 아치는 축조된 1965년부터 지금까지 미주리주의 투어리스트들을 끌어모으는 랜드마크로 자리잡았다. 저자는 게이트웨이 아치의 디자인 과정에서 간단한 도식이 사용되었을 것을 추론하고 이를 연구하기 위해 조사를 진행했다. 본 보고서는 아치의 설계 및 축조 과정에서 활용된 현수선 도식을 설명한 Osserman의 Mathematics of the Gateway Arch 글을 읽고 정리하여 이해한 내용을 재정리하고, 글에 명시된 식을 Grasshopper 3D에 적용하여 변수 및 정의역에 변화를 주면서 생산한 다양한 대안 디자인을 수록했다.</p>
+      </div>
+
+      <p>Esthetical components of architecture typically consist of mathematical perfection and harmony. One example that reinforces such an assumption is the St. Louis Gateway Arch, the tallest man-made structure in the western hemisphere<sup>1</sup> designed by modernist architect Eero Saarinen in 1965. Saarinen had conducted a design study through modifying a chain hanging in between two posts, which depicted a simple form of a catenary, a curve that describes the shape of a flexible hanging chain or cable.<sup>2</sup> A catenary, like a parabola, must consist of a point where <img class="math-inline" src="/blog/gateway-arch/image1.png" alt="dy/dx = 0"> and domain range <img class="math-inline" src="/blog/gateway-arch/image2.png" alt="domain"> where <img class="math-inline" src="/blog/gateway-arch/image3.png" alt="lower bound"> and <img class="math-inline" src="/blog/gateway-arch/image4.png" alt="upper bound">.</p>
+
+      <h2>Design Process</h2>
+
+      <div class="fig-row">
+        <div>
+          <img class="fig-full" src="/blog/gateway-arch/image21.png" alt="Hanging chain demonstration">
+          <p class="fig-caption">Figure 1</p>
+        </div>
+        <div>
+          <img class="fig-full" src="/blog/gateway-arch/image19.png" alt="Hanging chain demonstration">
+          <p class="fig-caption">Figure 2</p>
+        </div>
+      </div>
+
+      <p>Modifying the density of the chain and the gravitational force exerted at the lowest point of the curve—where the y vector force (the vertical load applied to a point of the arc) is the greatest—Saarinen pursued a weighted catenary that would become the centerline of the arc sweep. A weighted catenary, or modified catenary is distinguished from an original curvature, as such modified versions consist of variables such as unequal density of hanging line, gravitational force, and the additional weight it supports at the lowest point.</p>
+
+      <p>The study of catenary was first conducted by Galileo Galilei during the 18th century.<sup>3</sup> Afterwards, Robert Hooke in 1675 made the connection of the simple arc as an esthetical component. "As hangs the chain, so stands the arch," he said, which roughly translates to: "the geometry of a standing arch should mirror that of a hanging chain."<sup>4</sup> Saarinen had adopted the earlier pursuit of aesthetics in his own design process.</p>
+
+      <h2>Gateway Arch Specifications</h2>
+
+      <p>Gateway Arch is a tube-like structure whose centerline is an inverted catenary. The equation of the flattened centerline is <img class="math-inline" src="/blog/gateway-arch/image5.png" alt="y = A cosh(x/A) - A"> where <img class="math-inline" src="/blog/gateway-arch/image6.png" alt="A value">.<sup>5</sup> According to Osserman, the centerline of the curve is given by the equation <img class="math-inline" src="/blog/gateway-arch/image7.png" alt="centerline equation">, measured in feet. The front view of the centerline is depicted in Figure 3. Figure 4 is the isometric graphic render of the Gateway Arch, utilizing the variable specifications supplied by Osserman.</p>
+
+      <div class="fig-row">
+        <div>
+          <img class="fig-full" src="/blog/gateway-arch/image18.png" alt="Front view centerline of Gateway Arch">
+          <p class="fig-caption">Figure 3</p>
+        </div>
+        <div>
+          <img class="fig-full" src="/blog/gateway-arch/image24.jpg" alt="Isometric render of Gateway Arch">
+          <p class="fig-caption">Figure 4</p>
+        </div>
+      </div>
+
+      <h2>Modification of Variables</h2>
+
+      <p>The key function utilized in Peluso's Grasshopper model of the Gateway Arch is the catenary function, which requires start and end points of the curve, length of the curvature, and the direction of gravity to produce a catenary curve. This existing Grasshopper function is futile for the aim of the design investigation as the variables for the function do not refer to the modification of the gravitational factor nor the A, B, and C values of the original equation of curvature <em>y</em> = <em>A</em>&thinsp;cosh(<em>Bx</em>) + <em>C</em>. Thus, the study necessitates a separate graphing process. The variables of which the study modified are as follows:</p>
+
+      <table>
+        <thead>
+          <tr><th>Variable</th><th>Test Function</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>A</td><td><img class="math-inline" src="/blog/gateway-arch/image8.png" alt="test function A"></td></tr>
+          <tr><td>B</td><td><img class="math-inline" src="/blog/gateway-arch/image9.png" alt="test function B"></td></tr>
+          <tr><td>C</td><td><img class="math-inline" src="/blog/gateway-arch/image10.png" alt="test function C"></td></tr>
+        </tbody>
+      </table>
+
+      <p>The author hypothesized that the modification of variable A or B will result in a steeper and slimmer curvature. Modification of variable C would supposedly result in change in maximum height of the curvature, with the domain being kept equal.</p>
+
+      <img class="fig-full" src="/blog/gateway-arch/image23.png" alt="Full Grasshopper 3D Script of the Gateway Arch Model">
+      <p class="fig-caption">Figure 5 — Full Grasshopper 3D Script of the Gateway Arch Model</p>
+
+      <h2>Design Outputs</h2>
+
+      <table>
+        <thead>
+          <tr><th>Variable</th><th>Graph</th><th>Render</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>A</td>
+            <td><img class="fig-full" src="/blog/gateway-arch/image20.png" alt="Graph A"></td>
+            <td><img class="fig-full" src="/blog/gateway-arch/image12.jpg" alt="Render A"></td>
+          </tr>
+          <tr>
+            <td>B</td>
+            <td><img class="fig-full" src="/blog/gateway-arch/image13.png" alt="Graph B"></td>
+            <td><img class="fig-full" src="/blog/gateway-arch/image25.jpg" alt="Render B"></td>
+          </tr>
+          <tr>
+            <td>C</td>
+            <td><img class="fig-full" src="/blog/gateway-arch/image16.png" alt="Graph C"></td>
+            <td><img class="fig-full" src="/blog/gateway-arch/image26.jpg" alt="Render C"></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>Graph A shrunk in its domain and the y-intercept, without change in <img class="math-inline" src="/blog/gateway-arch/image11.png" alt="dy/dx"> in between intervals <img class="math-inline" src="/blog/gateway-arch/image2.png" alt="domain">. Graph B was consistent with the original graph's apex point, but shifted in its <img class="math-inline" src="/blog/gateway-arch/image11.png" alt="dy/dx"> value. Graph C is a shorter version of the original graph without any loss in domain.</p>
+
+      <h2>Alternate Design Output</h2>
+
+      <p>The following render images modified variables such as number of points in the base polygon (which is 3 in the original design) and radii of sweep intervals. These simple processes would partially replicate Saarinen's design process to pursue the ideal form of the catenary structure.</p>
+
+      <div class="fig-row">
+        <img src="/blog/gateway-arch/image17.jpg" alt="Alternate design 1" style="flex:1;min-width:0;width:0;border-radius:2px;">
+        <img src="/blog/gateway-arch/image22.jpg" alt="Alternate design 2" style="flex:1;min-width:0;width:0;border-radius:2px;">
+        <img src="/blog/gateway-arch/image14.jpg" alt="Alternate design 3" style="flex:1;min-width:0;width:0;border-radius:2px;">
+        <img src="/blog/gateway-arch/image15.jpg" alt="Alternate design 4" style="flex:1;min-width:0;width:0;border-radius:2px;">
+      </div>
+
+      <h2>Limitations</h2>
+
+      <p>The research failed to model the curvature through modified Python Script integrated within Grasshopper, which would likely have simplified the modification process of the curvature. Also, the study largely ignores the concept of the density function which played a central role in both Saarinen's design process and hence Osserman's research.</p>
+
+      <hr>
+
+      <h2 class="no-counter">References</h2>
+      <ol class="references">
+        <li>Lohaff, Hiking Missouri.</li>
+        <li>Carlson, Stephan C. "catenary | mathematics | Britannica." <em>Encyclopedia Britannica</em>. Accessed July 4, 2022.</li>
+        <li>Osserman, Robert. "Mathematics of the Gateway Arch." <em>Notices of the AMS</em> 57 (2): 220–229, p. 221.</li>
+        <li>Osserman, p. 220.</li>
+        <li>Osserman, p. 221.</li>
+        <li>Peluso, Alphonso. 2012. "Grasshopper - St. Louis Arch." <em>YouTube</em>.</li>
+      </ol>
+
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="/scene.js"></script>
+</body>
+</html>
