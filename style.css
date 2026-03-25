@@ -1,3 +1,5 @@
+html { scroll-behavior: smooth; }
+
 *, *::before, *::after { box-sizing: border-box; }
 
 body {
@@ -115,48 +117,7 @@ body {
   paint-order: stroke fill;
 }
 
-/* ── Recent post widget (home page) ─────────── */
 
-#recent-post {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 32px;
-  padding-top: 20px;
-  border-top: 1px solid rgba(0,0,0,0.12);
-  pointer-events: all;
-  gap: 4px;
-}
-
-.recent-label {
-  font-family: 'Inter', sans-serif;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #111;
-  -webkit-text-stroke: 2px white;
-  paint-order: stroke fill;
-}
-
-.recent-title {
-  font-family: 'Inter', sans-serif;
-  font-size: 15px;
-  font-weight: 500;
-  color: #111;
-  text-decoration: none;
-  -webkit-text-stroke: 3px white;
-  paint-order: stroke fill;
-}
-.recent-title:hover { text-decoration: none; }
-
-.recent-meta {
-  font-family: 'Inter', sans-serif;
-  font-size: 11px;
-  color: #111;
-  -webkit-text-stroke: 2px white;
-  paint-order: stroke fill;
-}
 
 /* ── Blog & post pages ──────────────────────── */
 
@@ -179,6 +140,20 @@ body {
 .post-meta { font-size: 11px; color: #888; margin-top: 4px; }
 .post-desc { font-size: 13px; color: #444; margin-top: 8px; line-height: 1.6; }
 
+/* ── Post back nav (above container) ────────── */
+
+.post-nav {
+  position: relative;
+  z-index: 2;
+  max-width: 816px;
+  margin: 48px auto 16px;
+  padding: 0;
+  font-size: 13px;
+  color: #888;
+  font-family: 'Inter', sans-serif;
+}
+.post-nav a { color: #888; text-decoration: none; }
+
 /* ── Post page card ─────────────────────────── */
 
 .post-page {
@@ -187,19 +162,12 @@ body {
   background: #fff;
   box-shadow: 0 0 0 1px rgba(0,0,0,0.06), 0 8px 40px rgba(0,0,0,0.08);
   border-radius: 2px;
-  max-width: 780px;
+  max-width: 816px;
   margin: 48px auto;
   padding: 80px 96px 100px;
   min-height: calc(100vh - 96px);
 }
 
-.post-page > nav {
-  margin-bottom: 56px;
-  font-size: 13px;
-  color: #888;
-}
-.post-page > nav a { color: #888; text-decoration: none; }
-.post-page > nav a:hover { text-decoration: none; }
 
 /* ── Post body ──────────────────────────────── */
 
@@ -402,6 +370,10 @@ body {
 /* ── Mobile ─────────────────────────────────── */
 
 @media (max-width: 860px) {
+  .post-nav {
+    margin: 24px auto 12px;
+    padding: 0 28px;
+  }
   .post-page {
     padding: 48px 28px 72px;
     margin: 0;
