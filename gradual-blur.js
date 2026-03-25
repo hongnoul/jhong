@@ -1,7 +1,7 @@
 (function () {
   const EDGES = ['top', 'bottom', 'left', 'right'];
   const DIV_COUNT = 16;
-  const STRENGTH = 0.18;
+  const STRENGTH = window.matchMedia('(max-width: 768px)').matches ? 0.06 : 0.18;
   const SIZE = '220px';
   const increment = 100 / DIV_COUNT;
 
